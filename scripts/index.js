@@ -150,7 +150,7 @@ const dataListIngredients = new dataList("#ingrédient-container", getIngredient
 const dataListAppareils = new dataList("#appareil-container", getAppareils(recipes), displayTags);
 const dataListUstensiles = new dataList("#ustensile-container", getUstensiles(recipes), displayTags);
 
-let recipesSearch = [];
+let recipesSearch = recipes;
 let recipesTags = [];
 
 async function init() {
