@@ -11,7 +11,6 @@ class dataList {
 		this._setDataList();
 		this._addEventListeners();
 		this._setParentWidth();
-		console.log(this.parentContainer);
 	}
 	set dataOptions(data) {
 		this.data = data;
@@ -72,7 +71,6 @@ class dataList {
 				// Unique selection value
 				this.selected = [...new Set([...this.selected, option.value])];
 				this.selectedCallBack();
-				console.log(this.selected);
 			});
 		});
 	}
