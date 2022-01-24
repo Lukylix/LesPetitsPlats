@@ -81,11 +81,77 @@ function displayTags() {
 			tagsContainer.appendChild(tagDom);
 		});
 	});
+	recipesTags = searchTags();
+	displayCards(recipesTags);
+	dataListIngredients.dataOptions = getIngredients(recipesTags);
+	dataListAppareils.dataOptions = getAppareils(recipesTags);
+	dataListUstensiles.dataOptions = getUstensiles(recipesTags);
+}
+
+function searchTags() {
+	const tags = [
+		{ type: "ingredients", selected: dataListIngredients.selected },
+		{ type: "appareils", selected: dataListAppareils.selected },
+		{ type: "ustensiles", selected: dataListUstensiles.selected },
+	];
+	const results = [];
+	for (const recipe of recipesSearch) {
+		let tagsFound = true;
+		for (const tag of tags) {
+			const tagType = tag.type;
+			if (tagType === "ingredients") {
+				const ingredients = recipe.ingredients.reduce((acc, ingredient) => (acc += ingredient.ingredient + " "), "");
+				let areWorldsFound = true;
+				for (const selected of tag.selected) {
+					if (!ingredients.toLowerCase().includes(selected.toLowerCase())) {
+						areWorldsFound = false;
+						break;
+					}
+				}
+				if (!areWorldsFound) {
+					tagsFound = false;
+					break;
+				}
+			}
+			if (tagType === "appareils") {
+				let areWorldsFound = true;
+				for (const selected of tag.selected) {
+					if (!recipe.appliance.toLowerCase().includes(selected.toLowerCase())) {
+						areWorldsFound = false;
+						break;
+					}
+				}
+				if (!areWorldsFound) {
+					tagsFound = false;
+					break;
+				}
+			}
+			if (tagType === "ustensiles") {
+				let ustensiles = recipe.ustensils.reduce((acc, ustensile) => (acc += ustensile + " "), "");
+				let areWorldsFound = true;
+				for (const selected of tag.selected) {
+					if (!ustensiles.toLowerCase().includes(selected.toLowerCase())) {
+						areWorldsFound = false;
+						break;
+					}
+				}
+				if (!areWorldsFound) {
+					tagsFound = false;
+					break;
+				}
+			}
+		}
+		if (tagsFound) results.push(recipe);
+	}
+	return results;
 }
 
 const dataListIngredients = new dataList("#ingrédient-container", getIngredients(recipes), displayTags);
 const dataListAppareils = new dataList("#appareil-container", getAppareils(recipes), displayTags);
 const dataListUstensiles = new dataList("#ustensile-container", getUstensiles(recipes), displayTags);
+
+let recipesSearch = [];
+let recipesTags = [];
 
 async function init() {
 	displayCards(recipes);
@@ -93,17 +159,15 @@ async function init() {
 	document.querySelector(".research-bar input").addEventListener("keyup", (event) => {
 		const input = event.target;
 		if (input.value.length > 2) {
-			const results = search(input.value);
-			displayCards(results);
-			dataListIngredients.dataOptions = getIngredients(results);
-			dataListAppareils.dataOptions = getAppareils(results);
-			dataListUstensiles.dataOptions = getUstensiles(results);
+			recipesSearch = search(input.value);
 		} else {
-			displayCards(recipes);
-			dataListIngredients.dataOptions = getIngredients(recipes);
-			dataListAppareils.dataOptions = getAppareils(recipes);
-			dataListUstensiles.dataOptions = getUstensiles(recipes);
+			recipesSearch = recipes;
 		}
+		recipesTags = searchTags();
+		displayCards(recipesTags);
+		dataListIngredients.dataOptions = getIngredients(recipesTags);
+		dataListAppareils.dataOptions = getAppareils(recipesTags);
+		dataListUstensiles.dataOptions = getUstensiles(recipesTags);
 	});
 }
 

@@ -16,6 +16,7 @@ class dataList {
 		this.data = data;
 		this._setDataList();
 		this._setParentWidth();
+		this._addEventListenersOptions();
 	}
 
 	removeSelected(value) {
@@ -45,6 +46,18 @@ class dataList {
 			return;
 		}
 	}
+
+	_addEventListenersOptions() {
+		this.options.forEach((option) => {
+			option.addEventListener("click", () => {
+				//this.input.value = option.value;
+				// Unique selection value
+				this.selected = [...new Set([...this.selected, option.value])];
+				this.selectedCallBack();
+			});
+		});
+	}
+
 	_addEventListeners() {
 		this.input.addEventListener("focus", () => {
 			this.dataList.style.display = "grid";
@@ -65,14 +78,7 @@ class dataList {
 				}
 			});
 		});
-		this.options.forEach((option) => {
-			option.addEventListener("click", () => {
-				//this.input.value = option.value;
-				// Unique selection value
-				this.selected = [...new Set([...this.selected, option.value])];
-				this.selectedCallBack();
-			});
-		});
+		this._addEventListenersOptions();
 	}
 }
 

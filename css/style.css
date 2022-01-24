@@ -35,6 +35,7 @@ main {
 #card-container {
 	display: grid;
 	margin-top: 20px;
+	padding-bottom: 50px;
 	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 	grid-gap: 50px;
 }
