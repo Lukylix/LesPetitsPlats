@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="stylesheet" href="./style.css" />
+		<link rel="stylesheet" href="./css/style.css" />
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.css" />
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto" />
 		<link rel="shortcut icon" href="assets/favicon.ico" />
@@ -20,6 +20,33 @@
 					class="fas fa-search"
 				></i>
 			</div>
+
+			<div class="tags"></div>
+
+			<div class="dropdown-container">
+				<div id="ingrédient-container" class="input-container">
+					<input autocomplete="off" list="" name="ingrédient" id="ingrédient" placeholder="Ingredients" />
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<datalist id="ingrédients"> </datalist>
+			</div>
+
+			<div class="dropdown-container">
+				<div id="appareil-container" class="input-container">
+					<input autocomplete="off" list="" name="appareil" id="appareil" placeholder="Appareil" />
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<datalist id="appareils"> </datalist>
+			</div>
+
+			<div class="dropdown-container">
+				<div id="ustensile-container" class="input-container">
+					<input autocomplete="off" list="" name="ustensile" id="ustensile" placeholder="Ustensiles" />
+					<i class="fas fa-chevron-down"></i>
+				</div>
+				<datalist id="ustensiles"> </datalist>
+			</div>
+
 			<section id="card-container">
 				<!-- <figure class="card">
 					<img class="fake-image">
@@ -39,6 +66,7 @@
 		</main>
 		<script src="./scripts/data/recipes.js"></script>
 		<script src="./scripts/factories/card.js"></script>
+		<script src="./scripts/datalist.js"></script>
 		<script src="./scripts/index.js"></script>
 	</body>
 </html>

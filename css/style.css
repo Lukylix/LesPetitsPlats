@@ -1,4 +1,5 @@
 @import url(./normalizer.css);
+@import url(./datalist.css);
 
 body {
 	font-family: "Roboto", sans-serif;
@@ -33,7 +34,7 @@ main {
 
 #card-container {
 	display: grid;
-	margin-top: 50px;
+	margin-top: 20px;
 	grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
 	grid-gap: 50px;
 }
@@ -78,4 +79,52 @@ main {
 	display: -webkit-box;
 	-webkit-line-clamp: 7;
 	-webkit-box-orient: vertical;
+}
+
+.input-container {
+	display: inline-block;
+	margin-top: 15px;
+	margin-right: 15px;
+}
+
+.input-container i {
+	color: white;
+	position: absolute;
+	right: 15px;
+	top: 50%;
+	transform: translateY(-50%);
+	pointer-events: none;
+}
+
+input[list] {
+	height: 60px;
+	padding: 10px;
+	border-radius: 5px;
+	border: none;
+	color: white;
+}
+
+input[list]:focus + i {
+	transform: translateY(-50%) rotate(180deg);
+}
+
+input[list]::-webkit-input-placeholder {
+	color: white;
+}
+
+/* Remove arrow */
+input[list]::-webkit-calendar-picker-indicator {
+	display: none !important;
+}
+
+input[list]#ingrédient {
+	background-color: #3282f7;
+}
+
+input[list]#appareil {
+	background-color: #68d9a4;
+}
+
+input[list]#ustensile {
+	background-color: #ef7769;
 }
