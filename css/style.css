@@ -40,6 +40,14 @@ main {
 	grid-gap: 50px;
 }
 
+#card-container > h2 {
+	font-weight: normal;
+	text-align: center;
+	grid-column: 1 / -1;
+	margin-top: 60px;
+	color: #979da9;
+}
+
 #card-container .card {
 	height: 500px;
 	border-radius: 10px;

@@ -6,6 +6,12 @@ async function displayCards(recipes) {
 		const cardDom = cardModel.getCardDom();
 		cardContainer.appendChild(cardDom);
 	});
+	if (recipes.length < 1) {
+		const noResult = document.createElement("h2");
+		noResult.textContent =
+			"Aucune recette ne correspond à votre critère… vous pouvez chercher « tarte aux pommes », « poisson », etc.";
+		cardContainer.appendChild(noResult);
+	}
 }
 
 function search(searchTerm) {
