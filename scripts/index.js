@@ -15,6 +15,7 @@ async function displayCards(recipes) {
 }
 
 function search(searchTerm) {
+	if (!searchTerm.length > 2) return recipes;
 	const searchTerms = searchTerm.toLowerCase().split(" ");
 	let results = [];
 	for (const recipe of recipes) {
@@ -164,12 +165,9 @@ async function init() {
 
 	document.querySelector(".research-bar input").addEventListener("keyup", (event) => {
 		const input = event.target;
-		if (input.value.length > 2) {
-			recipesSearch = search(input.value);
-		} else {
-			recipesSearch = recipes;
-		}
+		recipesSearch = search(input.value);
 		recipesTags = searchTags();
+
 		displayCards(recipesTags);
 		dataListIngredients.dataOptions = getIngredients(recipesTags);
 		dataListAppareils.dataOptions = getAppareils(recipesTags);

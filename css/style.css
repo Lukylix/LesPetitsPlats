@@ -8,6 +8,12 @@ body {
 header {
 	display: flex;
 	justify-content: center;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+header img {
+	height: 93px;
 }
 
 main {
