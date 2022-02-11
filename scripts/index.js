@@ -21,25 +21,21 @@ function search(searchTerm) {
 	// Get all search terms in lowercase into an array
 	const searchTerms = searchTerm.toLowerCase().split(" ");
 	let results = [];
-	for (const recipe of recipes) {
+	recipes.forEach((recipe) => {
 		let areWorldsFound = true;
-		for (const searchTerm of searchTerms) {
+		searchTerms.forEach((searchTerm) => {
+			if (!areWorldsFound) return;
 			// If a search term is not found in the recipe name or description
 			if (!(recipe.name.toLowerCase().includes(searchTerm) || recipe.description.toLowerCase().includes(searchTerm))) {
 				// Get all ingredients form the recipe in an single string
 				const ingredients = recipe.ingredients.reduce((acc, ingredient) => (acc += ingredient.ingredient), "");
-				// If the search term is also not found in the ingredients
-				if (!ingredients.toLowerCase().includes(searchTerm)) {
-					// The recipe is not added to the results
-					areWorldsFound = false;
-					// Stop checking the current recipe
-					break;
-				}
+				// If the search term is also not found in the ingredients, The recipe is not added to the results
+				if (!ingredients.toLowerCase().includes(searchTerm)) areWorldsFound = false;
 			}
-		}
+		});
 		// If all search terms are found in the recipe, add it to the results array
 		if (areWorldsFound) results.push(recipe);
-	}
+	});
 	return results;
 }
 
